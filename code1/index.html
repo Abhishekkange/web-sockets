@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>WebSocket Demo</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="form-group">
+            <label for="userInput">Enter something:</label>
+            <input type="text" class="form-control" id="userInput" placeholder="Type here...">
+        </div>
+        <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+    </div>
+    <script>
+        const wss = new WebSocket('ws://localhost:3000');
+        const input = document.getElementById('userInput');
+        const  btn = document.getElementById('submitButton');
+
+        wss.addEventListener("open", ()=>{
+            console.log("connected to server");
+
+            
+            
+        });
+
+         btn.addEventListener("click",()=>{
+
+            const data = input.value;
+            console.log(data);
+            wss.send(data);
+            console.log("data sent "+ data);
+         })
+
+        wss.addEventListener("message",e=>{
+
+            console.log(e.data);
+
+
+
+
+        })
+
+       
+    </script>
+</body>
+</html>
